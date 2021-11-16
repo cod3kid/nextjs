@@ -1,11 +1,10 @@
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
+import path from "path";
+import fs from "fs/promises";
 
 function Home(props) {
   const { products } = props;
   return (
-    <div className={styles.container}>
+    <div>
       <ul>
         {products.map((item) => (
           <li>{item.title}</li>
@@ -16,12 +15,13 @@ function Home(props) {
 }
 
 export async function getStaticProps() {
+  const filePath = path.join(process.cwd(), "data", "dummy-backend.json");
+  const jsonFile = await fs.readFile(filePath);
+  const data = JSON.parse(jsonFile);
+
   return {
     props: {
-      products: [
-        { id: "p1", title: "Product 1" },
-        { id: "p2", title: "Product 2" },
-      ],
+      products: data.products,
     },
   };
 }
