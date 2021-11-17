@@ -1,11 +1,12 @@
-import { getStaticProps } from ".";
-
 function IndividualPages(props) {
   const { products } = props;
 
   // For pages which are not prerendered by default
   if (!products) {
-    return <p>Loading ...</p>;
+    // return <p>Loading ...</p>;
+    return {
+      notFound: true,
+    };
   }
 
   return (

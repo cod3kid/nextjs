@@ -17,8 +17,8 @@ function Home(props) {
 export async function getStaticProps(context) {
   const filePath = path.join(process.cwd(), "data", "dummy-backend.json");
   // const jsonFile = await fs.readFile(filePath);
-  const data = JSON.parse(jsonFile);
-
+  // const data = JSON.parse(jsonFile);
+  const data = [];
   if (!data) {
     return {
       redirect: {
