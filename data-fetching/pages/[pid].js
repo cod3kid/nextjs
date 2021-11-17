@@ -2,6 +2,12 @@ import { getStaticProps } from ".";
 
 function IndividualPages(props) {
   const { products } = props;
+
+  // For pages which are not prerendered by default
+  if (!products) {
+    return <p>Loading ...</p>;
+  }
+
   return (
     <div>
       {products.map((item) => {
@@ -30,7 +36,8 @@ export async function getStaticPaths(context) {
         params: { pid: "p3" },
       },
     ],
-    fallback: false,
+    // If we have a pid4, and it's not included in the prerendered pages, this will fetch that page
+    fallback: true,
   };
 }
 
