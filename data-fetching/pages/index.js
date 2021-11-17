@@ -1,5 +1,5 @@
 import path from "path";
-import fs from "fs/promises";
+// import fs from "fs/promises";
 
 function Home(props) {
   const { products } = props;
@@ -14,9 +14,9 @@ function Home(props) {
   );
 }
 
-export async function getStaticProps() {
+export async function getStaticProps(context) {
   const filePath = path.join(process.cwd(), "data", "dummy-backend.json");
-  const jsonFile = await fs.readFile(filePath);
+  // const jsonFile = await fs.readFile(filePath);
   const data = JSON.parse(jsonFile);
 
   if (!data) {
@@ -26,11 +26,13 @@ export async function getStaticProps() {
       },
     };
   }
+
   if (data.length === 0) {
     return {
       notFound: true,
     };
   }
+
   return {
     props: {
       products: data.products,
