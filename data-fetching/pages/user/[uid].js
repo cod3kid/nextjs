@@ -1,16 +1,18 @@
 function UserProfilePage(props) {
-  const { username } = props;
+  const { id } = props;
   return (
     <div>
-      <h3>{username}</h3>
+      <h3>User {id}</h3>
     </div>
   );
 }
 
 export async function getServerSideProps(context) {
+  const { params } = context;
+
   return {
     props: {
-      username: "Sufail",
+      id: params.uid,
     },
   };
 }
